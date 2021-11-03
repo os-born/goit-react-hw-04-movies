@@ -1,0 +1,20 @@
+.nav__list{
+    display: flex;
+    padding-left: 40px;
+    list-style: none;
+}
+
+.nav__listItem:not(:last-child){
+    margin-right: 20px;
+}
+
+.nav__link{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    color: black;
+}
+
+.nav__linkActive{
+    color: red;
+}
