@@ -5,17 +5,16 @@ import SearchResult from '../../Components/SearchResult/SearchResult';
 
 const MoviesPage = () => {
   const { url } = useRouteMatch();
-  console.log(url);
   const [query, setQuery] = useState('');
 
-  const handleFormSubmit = query => {
-    setQuery(query);
+  const handleFormSubmit = searchQuery => {
+    setQuery(searchQuery);
   };
 
   return (
     <>
       <SearchForm onSubmit={handleFormSubmit} />
-      <SearchResult query={query} />
+      <SearchResult query={query} matchUrl={url} />
     </>
   );
 };

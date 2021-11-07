@@ -5,7 +5,7 @@ import './App.css';
 import AppBar from './Components/AppBar/AppBar';
 import Container from './Components/Container/Container';
 import HomePage from './pages/HomePage/';
-import MovieDetailsPage from './pages/MovieDetailsPage';
+import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
 import MoviesPage from './pages/MoviesPage/MoviesPage';
 
 function App() {
@@ -24,6 +24,10 @@ function App() {
 
           <Route path="/movies/:movieId">
             <MovieDetailsPage />
+          </Route>
+
+          <Route>
+            <HomePage />
           </Route>
         </Switch>
       </Container>
