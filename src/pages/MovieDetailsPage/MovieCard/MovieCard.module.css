@@ -1,0 +1,12 @@
+.Wrapper__card {
+    display: flex;
+}
+
+.Card__details{
+    width: 450px;
+    margin-left: 20px;
+}
+
+.GenresList__Item{
+    list-style: none;
+}

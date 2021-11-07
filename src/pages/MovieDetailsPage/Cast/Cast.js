@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieById } from '../../service/Movies/ApiService';
+import { fetchActorsByMovieId } from '../../../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import MovieCard from './MovieCard/MovieCard';
+import s from './Cast.module.css';
+import defaultLogo from '../../../images/no-photo.jpg';
 
-const MovieDetailsPage = () => {
+const Cast = () => {
   const { movieId } = useParams();
 
-  const [movie, setMovie] = useState({});
+  const [actors, setActors] = useState([]);
   const [status, setStatus] = useState('idle');
 
   useEffect(() => {
     setStatus('pending');
-    fetchMovieById(movieId)
+    fetchActorsByMovieId(movieId)
       .then(prev => {
-        setMovie(prev);
+        setActors(prev.cast);
         setStatus('resolved');
       })
       .catch(error => {
@@ -43,29 +44,26 @@ const MovieDetailsPage = () => {
     return <div>Something wrong! Try again later!</div>;
   }
   if (status === 'resolved') {
-    const {
-      poster_path,
-      title,
-      original_title,
-      name,
-      release_date,
-      vote_average,
-      overview,
-      genres,
-    } = movie;
     return (
-      <MovieCard
-        poster_path={poster_path}
-        title={title}
-        original_title={original_title}
-        name={name}
-        release_date={release_date}
-        vote_average={vote_average}
-        overview={overview}
-        genres={genres}
-      />
+      <ul className={s.actors__List}>
+        {actors.map(actor => (
+          <li className={s.imgWrap} key={actor.id}>
+            {actor.profile_path ? (
+              <img
+                className={s.img}
+                src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                alt={actor.name}
+              />
+            ) : (
+              <img className={s.img} src={defaultLogo} alt={actor.name} />
+            )}
+            <h3>{actor.name}</h3>
+            <p>Character: {actor.character}</p>
+          </li>
+        ))}
+      </ul>
     );
   }
 };
 
-export default MovieDetailsPage;
+export default Cast;

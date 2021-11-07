@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieById } from '../../service/Movies/ApiService';
+import { fetchReviewsByMovieId } from '../../../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import MovieCard from './MovieCard/MovieCard';
 
-const MovieDetailsPage = () => {
+const Reviews = () => {
   const { movieId } = useParams();
 
-  const [movie, setMovie] = useState({});
+  const [reviews, setreviews] = useState([]);
   const [status, setStatus] = useState('idle');
 
   useEffect(() => {
     setStatus('pending');
-    fetchMovieById(movieId)
+    fetchReviewsByMovieId(movieId)
       .then(prev => {
-        setMovie(prev);
+        setreviews(prev.results);
         setStatus('resolved');
       })
       .catch(error => {
@@ -43,29 +41,18 @@ const MovieDetailsPage = () => {
     return <div>Something wrong! Try again later!</div>;
   }
   if (status === 'resolved') {
-    const {
-      poster_path,
-      title,
-      original_title,
-      name,
-      release_date,
-      vote_average,
-      overview,
-      genres,
-    } = movie;
     return (
-      <MovieCard
-        poster_path={poster_path}
-        title={title}
-        original_title={original_title}
-        name={name}
-        release_date={release_date}
-        vote_average={vote_average}
-        overview={overview}
-        genres={genres}
-      />
+      <ul>
+        {reviews.map(review => (
+          <li key={review.id}>
+            {review.author}
+            <p>{review.content}</p>
+            <p>created: {Date(review.created_at)}</p>
+          </li>
+        ))}
+      </ul>
     );
   }
 };
 
-export default MovieDetailsPage;
+export default Reviews;

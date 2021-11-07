@@ -22,18 +22,18 @@ export async function fetchMoviesByQuery(query) {
 
 export async function fetchMovieById(movieId) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`,
+    `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US&page=1`,
   );
 }
 
 export async function fetchActorsByMovieId(movieId) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`,
+    `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US&page=1`,
   );
 }
 
-export async function fetchRewiewsByMovieId(movieId) {
+export async function fetchReviewsByMovieId(movieId) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`,
+    `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
   );
 }
