@@ -1,12 +1,29 @@
+import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
 import AppBar from './Components/AppBar/AppBar';
 import Container from './Components/Container/Container';
-import HomePage from './pages/HomePage/';
-import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
-import MoviesPage from './pages/MoviesPage/MoviesPage';
+
+// import HomePage from './pages/HomePage/';
+// import MoviesPage from './pages/MoviesPage/MoviesPage';
+// import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
+
+const HomePage = lazy(
+  () => import('./pages/HomePage/') /* chunkName: HomePage*/,
+);
+const MoviesPage = lazy(
+  () => import('./pages/MoviesPage/MoviesPage') /* chunkName: MoviesPage*/,
+);
+const MovieDetailsPage = lazy(
+  () =>
+    import(
+      './pages/MovieDetailsPage/MovieDetailsPage'
+    ) /* chunkName: MovieDetailsPage*/,
+);
 
 function App() {
   return (
@@ -14,18 +31,29 @@ function App() {
       <AppBar />
       <Container>
         <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
+          <Suspense
+            fallback={
+              <Loader
+                type="ThreeDots"
+                color="-webkit-link"
+                height={40}
+                width={80}
+                timeout={2000}
+              />
+            }
+          >
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
 
-          <Route path="/movies" exact>
-            <MoviesPage />
-          </Route>
+            <Route path="/movies" exact>
+              <MoviesPage />
+            </Route>
 
-          <Route path="/movies/:movieId">
-            <MovieDetailsPage />
-          </Route>
-
+            <Route path="/movies/:movieId">
+              <MovieDetailsPage />
+            </Route>
+          </Suspense>
           <Route>
             <HomePage />
           </Route>
