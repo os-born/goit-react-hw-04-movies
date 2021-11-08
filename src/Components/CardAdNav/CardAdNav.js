@@ -1,14 +1,18 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, useLocation } from 'react-router-dom';
 import s from './CardAdNav.module.css';
 
-const CardAdNav = () => {
+const CardAdNav = ({ onGoBack }) => {
   const { movieId } = useParams();
+  const location = useLocation();
   return (
     <ul className={s.NavList}>
       <li>
         <NavLink
-          to={`/movies/${movieId}/cast`}
+          to={{
+            pathname: `/movies/${movieId}/cast`,
+            state: { from: location },
+          }}
           className={s.Link}
           activeClassName={s.activeLink}
         >
@@ -17,7 +21,10 @@ const CardAdNav = () => {
       </li>
       <li>
         <NavLink
-          to={`/movies/${movieId}/rewiews`}
+          to={{
+            pathname: `/movies/${movieId}/rewiews`,
+            state: { from: location },
+          }}
           className={s.Link}
           activeClassName={s.activeLink}
         >

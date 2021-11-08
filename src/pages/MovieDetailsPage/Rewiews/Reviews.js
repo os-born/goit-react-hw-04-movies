@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviewsByMovieId } from '../../../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
+import s from './Reviews.module.css';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -41,16 +42,23 @@ const Reviews = () => {
     return <div>Something wrong! Try again later!</div>;
   }
   if (status === 'resolved') {
-    return (
-      <ul>
+    return reviews.length > 0 ? (
+      <ul className={s.reviews__List}>
         {reviews.map(review => (
-          <li key={review.id}>
-            {review.author}
+          <li key={review.id} className={s.reviews__ListItem}>
+            <h4>{review.author}</h4>
             <p>{review.content}</p>
-            <p>created: {Date(review.created_at)}</p>
+            <p>
+              <span className={s.review__dateTitle}>created:</span>
+              {Date(review.created_at)}
+            </p>
           </li>
         ))}
       </ul>
+    ) : (
+      <p className={s.noReviewInfo}>
+        We don`t have any reviews for this movie.
+      </p>
     );
   }
 };

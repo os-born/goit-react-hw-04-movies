@@ -6,6 +6,7 @@
 .actors__List{
     display: flex;
     width: 950px;
+    margin-top: 20px;
     flex-wrap: wrap;
     list-style: none;
 }

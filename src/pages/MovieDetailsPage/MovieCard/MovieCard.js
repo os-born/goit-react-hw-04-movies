@@ -1,9 +1,22 @@
-import React from 'react';
-import { Route, useRouteMatch, Switch } from 'react-router-dom';
-import CardAdNav from '../../../Components/CardAdNav/CardAdNav';
-import Cast from '../Cast/Cast';
-import Rewiews from '../Rewiews/Reviews';
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import s from './MovieCard.module.css';
+
+// import CardAdNav from '../../../Components/CardAdNav/CardAdNav';
+// import Cast from '../Cast/Cast';
+// import Rewiews from '../Rewiews/Reviews';
+
+const CardAdNav = lazy(() =>
+  import(
+    '../../../Components/CardAdNav/CardAdNav' /* chunkName: "CardAdNav" */
+  ),
+);
+const Cast = lazy(() => import('../Cast/Cast' /*  chunkName: "Cast" */));
+const Rewiews = lazy(() =>
+  import('../Rewiews/Reviews' /*  chunkName: "Rewiews" */),
+);
 
 const MovieCard = ({
   poster_path,
@@ -14,10 +27,19 @@ const MovieCard = ({
   vote_average,
   overview,
   genres,
+  onGoBack,
 }) => {
   const { path } = useRouteMatch();
+
   return (
     <div className={s.Card}>
+      <button
+        type="button"
+        onClick={onGoBack}
+        style={{ width: '80px', height: '25px', marginBottom: '20px' }}
+      >
+        Back
+      </button>
       <div className={s.Wrapper__card}>
         <img
           src={`https://image.tmdb.org/t/p/w400/${poster_path}`}
@@ -42,17 +64,31 @@ const MovieCard = ({
       </div>
       <div>
         <h3>Additional information</h3>
-        <CardAdNav />
+        <Suspense
+          fallback={
+            <Loader
+              type="ThreeDots"
+              color="-webkit-link"
+              height={40}
+              width={80}
+              timeout={2000}
+            />
+          }
+        >
+          <CardAdNav onGoBack={onGoBack} />
+        </Suspense>
       </div>
       <hr />
-      <Switch>
-        <Route path={`${path}/cast`}>
-          <Cast />
-        </Route>
-        <Route path={`${path}/rewiews`}>
-          <Rewiews />
-        </Route>
-      </Switch>
+      <Suspense fallback={<div>Loading . . . </div>}>
+        <Switch>
+          <Route path={`${path}/cast`}>
+            <Cast />
+          </Route>
+          <Route path={`${path}/rewiews`}>
+            <Rewiews />
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 };

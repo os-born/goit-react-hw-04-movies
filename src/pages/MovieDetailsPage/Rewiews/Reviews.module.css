@@ -1,0 +1,16 @@
+.reviews__List{
+    width: 870px;
+}
+
+.reviews__ListItem{
+    margin-top: 20px;
+}
+
+.review__dateTitle{
+    margin-right: 10px;
+    font-weight:600;
+}
+
+.noReviewInfo{
+    margin-top: 20px;
+}

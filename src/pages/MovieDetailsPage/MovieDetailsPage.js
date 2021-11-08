@@ -1,15 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { fetchMovieById } from '../../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import MovieCard from './MovieCard/MovieCard';
+
+// import MovieCard from './MovieCard/MovieCard';
+
+const MovieCard = lazy(() =>
+  import('./MovieCard/MovieCard' /* chunkName: MovieCard */),
+);
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  const { current } = useRef(location.state);
+
+  // console.log(location);
+  const history = useHistory();
+  // console.log(history);
+  // console.log(current);
+  // console.log(current.from);
 
   const [movie, setMovie] = useState({});
   const [status, setStatus] = useState('idle');
+
+  const onGoBack = () => {
+    history.push(current ? current.from : '/');
+  };
 
   useEffect(() => {
     setStatus('pending');
@@ -54,16 +71,29 @@ const MovieDetailsPage = () => {
       genres,
     } = movie;
     return (
-      <MovieCard
-        poster_path={poster_path}
-        title={title}
-        original_title={original_title}
-        name={name}
-        release_date={release_date}
-        vote_average={vote_average}
-        overview={overview}
-        genres={genres}
-      />
+      <Suspense
+        fallback={
+          <Loader
+            type="ThreeDots"
+            color="-webkit-link"
+            height={40}
+            width={80}
+            timeout={2000}
+          />
+        }
+      >
+        <MovieCard
+          poster_path={poster_path}
+          title={title}
+          original_title={original_title}
+          name={name}
+          release_date={release_date}
+          vote_average={vote_average}
+          overview={overview}
+          genres={genres}
+          onGoBack={onGoBack}
+        />
+      </Suspense>
     );
   }
 };
