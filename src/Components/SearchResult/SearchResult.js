@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import MovieList from '../MovieList/MovieList';
+import MovieList from '../MovieList';
 import { fetchMoviesByQuery } from '../../service/Movies/ApiService.js';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';

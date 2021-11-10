@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchActorsByMovieId } from '../../../service/Movies/ApiService';
+import { fetchActorsByMovieId } from '../../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import s from './Cast.module.css';
-import defaultLogo from '../../../images/no-photo.jpg';
+import defaultLogo from '../../images/no-photo.jpg';
 
 const Cast = () => {
   const { movieId } = useParams();

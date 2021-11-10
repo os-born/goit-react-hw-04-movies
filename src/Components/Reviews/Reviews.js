@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchReviewsByMovieId } from '../../../service/Movies/ApiService';
+import { fetchReviewsByMovieId } from '../../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
 import s from './Reviews.module.css';
 

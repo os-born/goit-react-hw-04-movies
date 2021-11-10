@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
-import { fetchMovieById } from '../../service/Movies/ApiService';
+import { fetchMovieById } from '../service/Movies/ApiService';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-// import MovieCard from './MovieCard/MovieCard';
-
 const MovieCard = lazy(() =>
-  import('./MovieCard/MovieCard' /* chunkName: MovieCard */),
+  import('../Components/MovieCard' /* chunkName: MovieCard */),
 );
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const { current } = useRef(location.state);
-
-  // console.log(location);
   const history = useHistory();
-  // console.log(history);
-  // console.log(current);
-  // console.log(current.from);
 
   const [movie, setMovie] = useState({});
   const [status, setStatus] = useState('idle');

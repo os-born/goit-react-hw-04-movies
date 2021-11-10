@@ -5,24 +5,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
-import AppBar from './Components/AppBar/AppBar';
-import Container from './Components/Container/Container';
-
-// import HomePage from './pages/HomePage/';
-// import MoviesPage from './pages/MoviesPage/MoviesPage';
-// import MovieDetailsPage from './pages/MovieDetailsPage/MovieDetailsPage';
+import AppBar from './Components/AppBar';
+import Container from './Components/Container';
 
 const HomePage = lazy(
-  () => import('./pages/HomePage/') /* chunkName: HomePage*/,
+  () => import('./pages/HomePage') /* chunkName: HomePage*/,
 );
 const MoviesPage = lazy(
-  () => import('./pages/MoviesPage/MoviesPage') /* chunkName: MoviesPage*/,
+  () => import('./pages/MoviesPage') /* chunkName: MoviesPage*/,
 );
 const MovieDetailsPage = lazy(
-  () =>
-    import(
-      './pages/MovieDetailsPage/MovieDetailsPage'
-    ) /* chunkName: MovieDetailsPage*/,
+  () => import('./pages/MovieDetailsPage') /* chunkName: MovieDetailsPage*/,
 );
 
 function App() {

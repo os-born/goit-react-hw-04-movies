@@ -5,19 +5,11 @@ import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import s from './MovieCard.module.css';
 
-// import CardAdNav from '../../../Components/CardAdNav/CardAdNav';
-// import Cast from '../Cast/Cast';
-// import Rewiews from '../Rewiews/Reviews';
-
 const CardAdNav = lazy(() =>
-  import(
-    '../../../Components/CardAdNav/CardAdNav' /* chunkName: "CardAdNav" */
-  ),
+  import('../CardAdNav' /* chunkName: "CardAdNav" */),
 );
-const Cast = lazy(() => import('../Cast/Cast' /*  chunkName: "Cast" */));
-const Rewiews = lazy(() =>
-  import('../Rewiews/Reviews' /*  chunkName: "Rewiews" */),
-);
+const Cast = lazy(() => import('../Cast' /*  chunkName: "Cast" */));
+const Reviews = lazy(() => import('../Reviews' /*  chunkName: "Rewiews" */));
 
 const MovieCard = ({
   poster_path,
@@ -86,7 +78,7 @@ const MovieCard = ({
             <Cast />
           </Route>
           <Route path={`${path}/rewiews`}>
-            <Rewiews />
+            <Reviews />
           </Route>
         </Switch>
       </Suspense>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
-import SearchForm from '../../Components/SearchForm/SearchForm';
-import SearchResult from '../../Components/SearchResult/SearchResult';
+import SearchForm from '../Components/SearchForm';
+import SearchResult from '../Components/SearchResult';
 import queryString from 'query-string';
 
 const MoviesPage = () => {

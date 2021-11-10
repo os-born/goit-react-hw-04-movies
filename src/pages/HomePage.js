@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import MovieList from '../../Components/MovieList/MovieList.js';
-import * as fetch from '../../service/Movies/ApiService.js';
+import MovieList from '../Components/MovieList/MovieList.js';
+import * as fetch from '../service/Movies/ApiService.js';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const HomePage = () => {
