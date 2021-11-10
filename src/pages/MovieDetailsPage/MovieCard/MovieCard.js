@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -92,4 +93,16 @@ const MovieCard = ({
     </div>
   );
 };
+
+MovieCard.propTypes = {
+  poster_path: PropTypes.string,
+  title: PropTypes.string,
+  original_title: PropTypes.string,
+  name: PropTypes.string,
+  release_date: PropTypes.string,
+  overview: PropTypes.string,
+  genres: PropTypes.array,
+  onGoBack: PropTypes.func.isRequired,
+};
+
 export default MovieCard;

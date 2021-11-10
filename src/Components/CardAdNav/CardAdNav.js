@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink, useParams, useLocation } from 'react-router-dom';
 import s from './CardAdNav.module.css';
 
@@ -33,6 +34,10 @@ const CardAdNav = ({ onGoBack }) => {
       </li>
     </ul>
   );
+};
+
+CardAdNav.propTypes = {
+  onGoBack: PropTypes.func.isRequired,
 };
 
 export default CardAdNav;

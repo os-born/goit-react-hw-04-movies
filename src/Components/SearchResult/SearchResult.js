@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import MovieList from '../MovieList/MovieList';
 import { fetchMoviesByQuery } from '../../service/Movies/ApiService.js';
@@ -53,6 +54,11 @@ const SearchResult = ({ query, matchUrl = '' }) => {
     return <MovieList movies={resMovies} matchUrl={matchUrl} />;
   }
   return;
+};
+
+SearchResult.propTypes = {
+  query: PropTypes.string.isRequired,
+  matchUrl: PropTypes.string.isRequired,
 };
 
 export default SearchResult;
